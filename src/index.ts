@@ -296,8 +296,8 @@ interface TiebaTrackInfo {
     console.log(summaryText);
     console.log('==========================================');
     
-    // 5. 发送通知 - 只有在有贴吧签到失败时才发送
-    const shouldNotify = process.env.ENABLE_NOTIFY === 'true' && failedCount > 0;
+    // 5. 发送通知 - 有"成功"或"失败"结果时发送（每天首次运行触发一次，全部已签时跳过）
+    const shouldNotify = process.env.ENABLE_NOTIFY === 'true' && (successCount > 0 || failedCount > 0);
     
     if (shouldNotify) {
       console.log('▶️ 步骤5: 发送通知 (由于签到失败而触发)');
